@@ -208,7 +208,7 @@ var xhttp = new XMLHttpRequest();
 	var mainValue=((parseInt(obj[productName].OGQuantity)-parseInt(obj[productName].CurrentQuantity))/parseInt(obj[productName].OGQuantity))*100;
 	mainData[i]={value:mainValue, name:productName};
 	}
-	var myChart = echarts.init(document.getElementById('main'));
+	var myChart = echarts.init(document.getElementById('graph'));
 
 option = {
     backgroundColor: '#fff',
