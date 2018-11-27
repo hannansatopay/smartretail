@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="echarts.min.js"></script>
+<style>
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+<style>
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 10px;
+
+}
+
+.sidenav a {
+    padding: 10px 8px 6px 6px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+	text-align:left;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 20px 20px;
+}
+</style>
+<style>
+
+/* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
+/* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+
+/* -------------------- Rounded Corners */
+.rounded {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.slate   { background-color: #ddd; }
+.green   { background-color: #779126; }
+.blue    { background-color: #3b8ec2; }
+.yellow  { background-color: #eec111; }
+.black   { background-color: #000; }
+
+/* -------------------- Colors: Text */
+.slate select   { color: #000; }
+.green select   { color: #fff; }
+.blue select    { color: #fff; }
+.yellow select  { color: #000; }
+.black select   { color: #fff; }
+
+
+/* -------------------- Select Box Styles: danielneumann.com Method */
+/* -------------------- Source: http://danielneumann.com/blog/how-to-style-dropdown-with-css-only/ */
+#mainselection select {
+   border: 0;
+   color: #EEE;
+   background: transparent;
+   font-size: 20px;
+   font-weight: bold;
+   padding: 2px 10px;
+   width: 378px;
+   *width: 350px;
+   *background: #58B14C;
+   -webkit-appearance: none;
+}
+
+#mainselection {
+   overflow:hidden;
+   width:350px;
+   -moz-border-radius: 9px 9px 9px 9px;
+   -webkit-border-radius: 9px 9px 9px 9px;
+   border-radius: 9px 9px 9px 9px;
+   box-shadow: 1px 1px 11px #330033;
+   background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center;
+}
+
+
+/* -------------------- Select Box Styles: stackoverflow.com Method */
+/* -------------------- Source: http://stackoverflow.com/a/5809186 */
+select#soflow, select#soflow-color {
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   margin: 20px;
+   overflow: hidden;
+   padding: 5px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
+}
+
+select#soflow-color {
+   color: #fff;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
+   background-color: #779126;
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   padding-left: 15px;
+}
+</style>
+</head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body onload="navigate('Home')">
+<div class="sidenav">
+  <a id="navHome" onclick="navigate('Home')" class="w3-bar-item w3-button">Home</a>
+  <a id="navClassification" onclick="navigate('Classification')" class="w3-bar-item w3-button">Classification</a>
+  <a id="navPrediction" onclick="navigate('Prediction')" class="w3-bar-item w3-button">Prediction</a>
+</div>
+<div class="main">
+<div id="home">
+Content for home
+</div>
+
+<div id="classification">
+<button type="button" class="button" onclick="myFunction()">Get Categories</button>
+<div id="demo"></div>
+<div id="graph" style="width:600px; height:400px;"></div>
+</div>
+
+<div id="prediction">
+Content for prediction
+</div>
+</div>
+
+<script type="text/javascript">
+function getChart() {
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	var obj = JSON.parse(this.responseText);
+	
+	var result = Object.keys(obj);
+    var mainData=[];	
+	for(var i=0;i<result.length;i++)
+	{
+	var productName=result[i];
+	console.log(obj[productName]);
+	var mainValue=((parseInt(obj[productName].OGQuantity)-parseInt(obj[productName].CurrentQuantity))/parseInt(obj[productName].OGQuantity))*100;
+	mainData[i]={value:mainValue, name:productName};
+	}
+	var myChart = echarts.init(document.getElementById('main'));
+
+option = {
+    backgroundColor: '#fff',
+
+    title: {
+        text: 'Product Classification',
+        left: 'center',
+        top: 20,
+        textStyle: {
+            color: '#000'
+        }
+    },
+
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+
+    visualMap: {
+        show: false,
+        min: 10,
+        max: 100,
+        inRange: {
+            colorLightness: [0, 1]
+        }
+    },
+    series : [
+        {
+            name:'',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '50%'],
+            data:mainData.sort(function (a, b) { return a.value - b.value; }),
+            roseType: 'radius',
+            label: {
+                normal: {
+                    textStyle: {
+                        color: 'rgba(0, 0, 0, 0.3)'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: 'rgba(0, 0, 0, 0.3)'
+                    },
+                    smooth: 0.2,
+                    length: 10,
+                    length2: 20
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#c23531',
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            },
+
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function (idx) {
+                return Math.random() * 200;
+            }
+        }
+    ]
+};
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option);
+    }
+	
+  };
+  var e = document.getElementById("mySelect");
+  var categorytext = e.options[e.selectedIndex].text;
+  xhttp.open("GET","https://smart-trolley-4b9ce.firebaseio.com/ProductData/"+categorytext+".json?auth=Z3BvQc6auKulRpPo06dSFqWGdWRuQMFXSrZwszDF", true);
+  xhttp.send();
+  
+// based on prepared DOM, initialize echarts instance
+
+	}	
+    </script>
+	
+<!-- <script>
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	var obj = JSON.parse(this.responseText);
+	var performance=((parseInt(obj[2])-parseInt(obj[1]))/parseInt(obj[2]))*100;
+      document.getElementById("demo").innerHTML =
+      performance;
+    }
+  };
+  xhttp.open("GET","https://smart-trolley-4b9ce.firebaseio.com/ProductData/HideNSeek.json?auth=Z3BvQc6auKulRpPo06dSFqWGdWRuQMFXSrZwszDF", true);
+  xhttp.send();
+}
+</script> -->
+
+<script>
+function myFunction() {
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	var obj = JSON.parse(this.responseText);
+	var result = Object.keys(obj); 
+	document.getElementById("demo").innerHTML ="<p>Select the category:</p><form><div class=\"styled-select yellow rounded\"><select id=\"mySelect\"></select></div></form><button type=\"button\" class=\"button\" onclick=\"getChart()\">Make Chart</button>";
+	for(var i=0;i<result.length;i++)
+	{
+    var x = document.getElementById("mySelect");
+    var option = document.createElement("option");
+    option.text = result[i];
+    x.add(option);
+	}
+    }
+  };
+  xhttp.open("GET","https://smart-trolley-4b9ce.firebaseio.com/ProductData.json?auth=Z3BvQc6auKulRpPo06dSFqWGdWRuQMFXSrZwszDF&shallow=true", true);
+  xhttp.send();
+  
+
+}
+</script>
+
+<script>
+function navigate(navValue){
+if(navValue=="Home")
+{
+w3.addClass('#navHome','w3-red');
+w3.removeClass('#navClassification','w3-red')
+w3.removeClass('#navPrediction','w3-red');
+home.style.display = "block";
+classification.style.display = "none";
+prediction.style.display = "none";
+}
+if(navValue=="Classification")
+{
+w3.removeClass('#navHome','w3-red');
+w3.addClass('#navClassification','w3-red');
+w3.removeClass('#navPrediction','w3-red');
+home.style.display = "none";
+classification.style.display = "block";
+prediction.style.display = "none";
+}
+if(navValue=="Prediction")
+{
+w3.removeClass('#navHome','w3-red');
+w3.removeClass('#navClassification','w3-red');
+w3.addClass('#navPrediction','w3-red');
+home.style.display = "none";
+classification.style.display = "none";
+prediction.style.display = "block";
+}
+}
+</script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+</body>
+</html>
